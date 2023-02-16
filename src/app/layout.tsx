@@ -2,10 +2,12 @@ import "@/styles/globals.css"
 
 import { Inter as FontSans } from "@next/font/google"
 import clsx from "clsx"
+import { getServerSession } from "next-auth/next"
 
 import { AnalyticsWrapper } from "@/components/analytics"
 import Providers from "@/components/providers"
 import Sidebar from "@/components/sidebar"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -34,15 +36,16 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession(authOptions)
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={clsx("font-sans", fontSans.variable)}>
-        <Providers>
+        <Providers session={session}>
           <div className="flex">
             <Sidebar />
             <main className="flex-1">{children}</main>
