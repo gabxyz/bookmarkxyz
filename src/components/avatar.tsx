@@ -6,7 +6,7 @@ interface AvatarProps {
 }
 
 const Avatar = ({ name, imageUrl }: AvatarProps) => (
-  <AvatarPrimitive.Root className="inline-flex h-[28px] w-[28px] select-none items-center justify-center overflow-hidden rounded-full bg-blackA-3 align-middle">
+  <AvatarPrimitive.Root className="inline-flex h-7 w-7 select-none items-center justify-center overflow-hidden rounded-full bg-blackA-3 align-middle">
     <AvatarPrimitive.Image
       className="h-full w-full rounded-[inherit] object-cover"
       src={imageUrl}
