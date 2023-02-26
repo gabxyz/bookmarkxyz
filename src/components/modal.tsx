@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import clsx from "clsx"
 import { AnimatePresence, motion } from "framer-motion"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 interface ModalProps {
   triggerIcon: React.ReactElement
@@ -18,22 +18,15 @@ const Modal = ({
   isOpen,
   onOpenChange,
 }: ModalProps) => {
-  const [open, setOpen] = useState(false)
-
-  // Update the internal state when the prop changes
-  useEffect(() => {
-    setOpen(isOpen)
-  }, [isOpen])
-
   // Call the optional callback when the internal state changes
   useEffect(() => {
     if (onOpenChange) {
-      onOpenChange(open)
+      onOpenChange(isOpen)
     }
-  }, [open, onOpenChange])
+  }, [isOpen, onOpenChange])
 
   return (
-    <Dialog.Root modal open={open} onOpenChange={setOpen}>
+    <Dialog.Root modal open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Trigger
         className={clsx(
           "h-fit w-fit overflow-hidden text-gray-11 hover:text-gray-12",
@@ -43,7 +36,7 @@ const Modal = ({
         {triggerIcon}
       </Dialog.Trigger>
       <AnimatePresence mode="wait">
-        {open && (
+        {isOpen && (
           <Dialog.Portal forceMount>
             <Dialog.Overlay asChild forceMount>
               <motion.div
