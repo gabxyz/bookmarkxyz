@@ -1,13 +1,13 @@
-"use client"
 import { FolderHeart, Rocket, Scroll, User } from "lucide-react"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
+
+import { getCurrentUser } from "@/lib/session"
 
 import Avatar from "./avatar"
 import Tooltip from "./tooltip"
 
-const Sidebar = () => {
-  const { data: session } = useSession()
+const Sidebar = async () => {
+  const user = await getCurrentUser()
   return (
     <div className="sticky left-0 min-h-screen w-16 border-r border-gray-6 bg-gray-3">
       <div className="flex h-full flex-col items-center justify-between pb-6 pt-4 text-gray-11">
@@ -34,16 +34,13 @@ const Sidebar = () => {
               <Scroll size={20} />
             </Link>
           </Tooltip>
-          {session?.user ? (
-            <Tooltip content={`${session.user.name}'s Profile`} side="right">
+          {user ? (
+            <Tooltip content={`${user.name}'s Profile`} side="right">
               <Link
                 href="/profile"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
-                <Avatar
-                  name={session.user.name!}
-                  imageUrl={session.user.image!}
-                />
+                <Avatar name={user.name!} imageUrl={user.image!} />
               </Link>
             </Tooltip>
           ) : (
