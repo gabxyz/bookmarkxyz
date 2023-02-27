@@ -7,10 +7,7 @@ import { useRouter } from "next/navigation"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
-import BookmarkForm, {
-  BookmarkSchema,
-  BookmarkSchemaType,
-} from "@/components/bookmark-form"
+import BookmarkForm, { BookmarkSchema } from "@/components/bookmark-form"
 
 type initialDataProps = { listId?: string } & FormSchemaType
 
@@ -121,7 +118,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           </div>
           {bookmarks?.map((bookmark, index) => (
             <div
-              key={`bookmark.${index}.${bookmark.title}`}
+              key={bookmark.id}
               className="ml-px flex items-center justify-between border-b border-gray-6 pb-2"
             >
               <a
