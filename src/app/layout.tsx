@@ -47,6 +47,7 @@ export default async function RootLayout({
       <body className={clsx("font-sans", fontSans.variable)}>
         <Providers session={session}>
           <div className="flex">
+            {/* @ts-expect-error Server Component */}
             <Sidebar />
             <main className="flex-1">{children}</main>
           </div>
