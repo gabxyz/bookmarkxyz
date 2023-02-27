@@ -1,5 +1,6 @@
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
+"use client"
 
+import * as AvatarPrimitive from "@radix-ui/react-avatar"
 interface AvatarProps {
   name: string
   imageUrl: string

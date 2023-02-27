@@ -1,7 +1,9 @@
+"use client"
+
 import * as Dialog from "@radix-ui/react-dialog"
 import clsx from "clsx"
 import { AnimatePresence, motion } from "framer-motion"
-import React, { useEffect } from "react"
+import React from "react"
 
 interface ModalProps {
   triggerIcon: React.ReactElement
@@ -18,13 +20,6 @@ const Modal = ({
   isOpen,
   onOpenChange,
 }: ModalProps) => {
-  // Call the optional callback when the internal state changes
-  useEffect(() => {
-    if (onOpenChange) {
-      onOpenChange(isOpen)
-    }
-  }, [isOpen, onOpenChange])
-
   return (
     <Dialog.Root modal open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Trigger
