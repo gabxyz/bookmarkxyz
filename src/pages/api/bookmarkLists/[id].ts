@@ -10,18 +10,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { bookmarkListId } = req.query
+  const { id } = req.query
 
+  console.log(id)
   if (req.method === "GET") {
-    return await getBookmarkList(req, res, bookmarkListId as string)
+    return await getBookmarkList(req, res, id as string)
   }
 
   if (req.method === "PUT") {
-    return await updateBookmarkList(req, res, bookmarkListId as string)
+    return await updateBookmarkList(req, res, id as string)
   }
 
   if (req.method === "DELETE") {
-    return await deleteBookmarkList(req, res, bookmarkListId as string)
+    return await deleteBookmarkList(req, res, id as string)
   }
 
   return res.status(404).end()
@@ -76,11 +77,36 @@ async function updateBookmarkList(
         id: bookmarkListId,
         userId: session.user.id,
       },
+      include: {
+        bookmarks: true,
+      },
     })
 
     if (!bookmarkList) {
       return res.status(404).end()
     }
+
+    // Get the IDs of the bookmarks in the request
+    const requestBookmarkIds = bookmarks.map(
+      (bookmark: Bookmark) => bookmark.id,
+    )
+
+    // Get the IDs of the bookmarks in the existing bookmark list
+    const existingBookmarkIds = bookmarkList.bookmarks.map(
+      (bookmark) => bookmark.id,
+    )
+
+    // Find the IDs of the bookmarks that are in the existing bookmark list but not in the request
+    const removedBookmarkIds = existingBookmarkIds.filter(
+      (id) => !requestBookmarkIds.includes(id),
+    )
+
+    // Remove the bookmarks with the removed IDs
+    await db.bookmark.deleteMany({
+      where: {
+        id: { in: removedBookmarkIds },
+      },
+    })
 
     const updatedBookmarkList = await db.bookmarkList.update({
       where: { id: bookmarkListId },
@@ -88,11 +114,15 @@ async function updateBookmarkList(
         listName,
         listDescription,
         bookmarks: {
-          updateMany: bookmarks.map((bookmark: Bookmark) => ({
+          upsert: bookmarks.map((bookmark: Bookmark) => ({
             where: {
-              id: bookmark.id,
+              id: bookmark.id || bookmarkList.id,
             },
-            data: {
+            update: {
+              title: bookmark.title,
+              url: bookmark.url,
+            },
+            create: {
               title: bookmark.title,
               url: bookmark.url,
             },
