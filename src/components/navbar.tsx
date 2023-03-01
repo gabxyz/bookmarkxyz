@@ -6,18 +6,18 @@ import { getCurrentUser } from "@/lib/session"
 import Avatar from "./avatar"
 import Tooltip from "./tooltip"
 
-const Sidebar = async () => {
+const Navbar = async () => {
   const user = await getCurrentUser()
   return (
-    <div className="sticky left-0 min-h-screen w-16 border-r border-gray-6 bg-gray-3">
-      <div className="flex h-full flex-col items-center justify-between pb-6 pt-4 text-gray-11">
+    <div className="fixed z-20 h-14 w-full border-b border-gray-6 bg-gray-3 md:h-full md:w-16 md:border-r">
+      <div className="flex h-full items-center justify-between px-6 text-gray-11 md:flex-col md:py-6">
         <Link
           href="/"
           className="text-gray-12 hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard"
         >
           <FolderHeart size={28} />
         </Link>
-        <div className="flex flex-col items-center space-y-8">
+        <div className="flex items-center gap-8 md:flex-col">
           <Tooltip content="Explore" side="right">
             <Link
               href="/explore"
@@ -58,4 +58,4 @@ const Sidebar = async () => {
     </div>
   )
 }
-export default Sidebar
+export default Navbar

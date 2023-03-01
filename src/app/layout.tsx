@@ -5,8 +5,8 @@ import clsx from "clsx"
 import { getServerSession } from "next-auth/next"
 
 import { AnalyticsWrapper } from "@/components/analytics"
+import Navbar from "@/components/navbar"
 import Providers from "@/components/providers"
-import Sidebar from "@/components/sidebar"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 const fontSans = FontSans({
@@ -46,11 +46,11 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={clsx("font-sans", fontSans.variable)}>
         <Providers session={session}>
-          <div className="flex">
-            {/* @ts-expect-error Server Component */}
-            <Sidebar />
-            <main className="flex-1">{children}</main>
-          </div>
+          {/* @ts-expect-error Server Component */}
+          <Navbar />
+          <main className="flex max-h-screen flex-col pt-16 md:ml-16 md:pt-4">
+            {children}
+          </main>
         </Providers>
         <AnalyticsWrapper />
       </body>
