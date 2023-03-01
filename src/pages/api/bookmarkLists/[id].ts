@@ -42,7 +42,7 @@ async function getBookmarkList(
     const bookmarkList = await db.bookmarkList.findFirst({
       where: {
         id: bookmarkListId,
-        userId: session.user.id,
+        authorId: session.user.id,
       },
       include: {
         bookmarks: true,
@@ -75,7 +75,7 @@ async function updateBookmarkList(
     const bookmarkList = await db.bookmarkList.findFirst({
       where: {
         id: bookmarkListId,
-        userId: session.user.id,
+        authorId: session.user.id,
       },
       include: {
         bookmarks: true,
@@ -154,7 +154,7 @@ async function deleteBookmarkList(
     const bookmarkList = await db.bookmarkList.findFirst({
       where: {
         id: bookmarkListId,
-        userId: session.user.id,
+        authorId: session.user.id,
       },
     })
 

@@ -32,7 +32,7 @@ async function createBookmarkList(req: NextApiRequest, res: NextApiResponse) {
             title: bookmark.title,
           })),
         },
-        userId: session.user.id,
+        authorId: session.user.id,
       },
       include: {
         bookmarks: true,
