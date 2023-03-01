@@ -1,6 +1,3 @@
-import { Plus } from "lucide-react"
-import Link from "next/link"
-
 import ListCard from "@/components/list-card"
 import { db } from "@/lib/db"
 
