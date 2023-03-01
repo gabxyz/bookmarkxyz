@@ -24,10 +24,10 @@ const Tooltip = ({
         <TooltipPrimitive.Content
           side={side}
           align={align}
-          sideOffset={14}
+          sideOffset={12}
           className={clsx(
-            "z-20 inline-flex items-center py-1.5 px-2.5",
-            "rounded-xl bg-gray-7 text-sm font-medium text-gray-12 shadow",
+            "z-30 inline-flex items-center py-1 px-3",
+            "rounded-2xl bg-gray-6 text-[13px] font-medium text-gray-12 shadow",
             "motion-safe:rdx-side-bottom:animate-slide-down-fade motion-safe:rdx-side-top:animate-slide-up-fade",
             "motion-safe:rdx-side-left:animate-slide-left-fade motion-safe:rdx-side-right:animate-slide-right-fade",
           )}

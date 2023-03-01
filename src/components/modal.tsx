@@ -55,7 +55,7 @@ const Modal = ({
                       damping: 25,
                       stiffness: 350,
                     }}
-                    className="relative mt-10 flex max-w-lg cursor-auto flex-col gap-4 self-center rounded-lg border border-gray-6 bg-gray-3 px-8 py-4 text-[15px] shadow"
+                    className="relative mt-10 flex max-w-md flex-none cursor-auto flex-col gap-4 self-center rounded-lg border border-gray-6 bg-gray-3 px-8 py-6 text-[15px] shadow sm:w-full md:ml-16"
                   >
                     {children}
                     <Dialog.Close className="absolute top-2 right-2 text-gray-11 hover:text-gray-12 motion-safe:duration-200 motion-safe:ease-productive-standard">
