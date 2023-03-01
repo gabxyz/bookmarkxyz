@@ -89,14 +89,14 @@ const BookmarkForm = ({
       >
         <div className="flex flex-col gap-4">
           <div className="flex w-full flex-col items-start">
-            <label className="ml-px mb-2 font-medium opacity-75">
+            <label className="mb-2 font-medium opacity-75">
               Bookmark Title
             </label>
             <input
               {...register("title")}
               className={clsx(
                 errors.title && "border border-red-7",
-                "block w-full rounded-md bg-gray-6 py-1.5 px-2",
+                "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
               )}
             />
             {errors.title && (
@@ -106,14 +106,12 @@ const BookmarkForm = ({
             )}
           </div>
           <div className="flex w-full flex-col items-start">
-            <label className="ml-px mb-2 font-medium opacity-75">
-              Bookmark URL
-            </label>
+            <label className="mb-2 font-medium opacity-75">Bookmark URL</label>
             <input
               {...register("url")}
               className={clsx(
                 errors.url && "border border-red-7",
-                "block w-full rounded-md bg-gray-6 py-1.5 px-2",
+                "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
               )}
             />
             {errors.url && (
@@ -127,7 +125,7 @@ const BookmarkForm = ({
           type="submit"
           disabled={!isDirty}
           onClick={() => onSubmit()}
-          className="mt-4 w-3/5 self-center rounded-lg bg-gray-5 py-1.5 text-center font-medium text-slate-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+          className="mt-4 w-3/5 self-center rounded-lg bg-gray-5 py-1.5 text-center font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
         >
           {type === "add" ? "Add" : "Update"}
         </button>

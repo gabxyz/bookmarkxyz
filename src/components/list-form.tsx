@@ -73,12 +73,12 @@ const ListForm = ({ initialData, type }: FormProps) => {
         className="flex h-fit w-full max-w-lg flex-col gap-4 rounded-md border border-gray-6 bg-gray-3 px-8 py-4 text-[15px] shadow-md"
       >
         <div className="flex w-full flex-col items-start">
-          <label className="ml-px mb-2 font-medium opacity-75">List Name</label>
+          <label className="mb-2 font-medium opacity-75">List Name</label>
           <input
             {...methods.register("listName")}
             className={clsx(
               methods.formState.errors.listName && "border border-red-7",
-              "block w-full rounded-md bg-gray-6 py-1.5 px-2",
+              "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
             )}
           />
           {methods.formState.errors.listName?.message && (
@@ -88,14 +88,14 @@ const ListForm = ({ initialData, type }: FormProps) => {
           )}
         </div>
         <div className="flex w-full flex-col items-start">
-          <label className="ml-px mb-2 font-medium opacity-75">
+          <label className="mb-2 font-medium opacity-75">
             List Description
           </label>
           <input
             {...methods.register("listDescription")}
             className={clsx(
               methods.formState.errors.listDescription && "border border-red-7",
-              "block w-full rounded-md bg-gray-6 py-1.5 px-2",
+              "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
             )}
           />
           {methods.formState.errors.listDescription?.message && (
@@ -104,8 +104,8 @@ const ListForm = ({ initialData, type }: FormProps) => {
             </p>
           )}
         </div>
-        <div className="ml-px mt-4 flex w-full flex-col gap-6">
-          <div className="flex flex-col items-start">
+        <div className="flex w-full flex-col gap-3">
+          <div className="my-4 flex flex-col items-start">
             <div className="flex w-full items-center justify-between">
               <p className="font-medium opacity-75">Bookmarks</p>
               <BookmarkForm type="add" />
@@ -119,11 +119,11 @@ const ListForm = ({ initialData, type }: FormProps) => {
           {bookmarks?.map((bookmark, index) => (
             <div
               key={bookmark.id || `bookmark.${index}.${bookmark.title}`}
-              className="ml-px flex items-center justify-between border-b border-gray-6 pb-2"
+              className="mx-px flex items-center justify-between gap-2 border-b border-gray-6 pb-3 last:border-0"
             >
               <a
                 className={clsx(
-                  "group inline-flex items-center gap-1 text-sm font-medium",
+                  "group inline-flex w-1/2 items-center justify-start gap-px truncate text-sm font-medium",
                   "underline decoration-gray-11 decoration-from-font underline-offset-4",
                   "hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard",
                 )}
@@ -138,12 +138,17 @@ const ListForm = ({ initialData, type }: FormProps) => {
                   className="text-gray-11 group-hover:rotate-45 motion-safe:duration-200 motion-safe:ease-productive-standard"
                 />
               </a>
-              <div className="flex items-center gap-3">
-                <BookmarkForm
-                  type="update"
-                  index={index}
-                  initialData={bookmark}
-                />
+              <div className="flex w-1/2 items-center justify-end gap-2">
+                <p className="truncate pr-px text-[13px] italic text-gray-11">
+                  {bookmark.url}
+                </p>
+                <div className="flex items-center gap-2">
+                  <BookmarkForm
+                    type="update"
+                    index={index}
+                    initialData={bookmark}
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -155,7 +160,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
             methods.formState.isSubmitSuccessful
           }
           type="submit"
-          className="mt-2 w-full rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-slate-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+          className="mt-2 w-full rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
         >
           Save
         </button>
