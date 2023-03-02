@@ -72,8 +72,8 @@ const ListCard = ({
               >
                 <div className="p-4 font-medium">
                   <p className="text-center opacity-80">
-                    Are you sure you want to delete{" "}
-                    <span className="font-bold">{listName}</span> list?{" "}
+                    Are you sure you want to delete <strong>{listName}</strong>{" "}
+                    list?
                   </p>
                   <div className="mt-4 flex gap-4">
                     <button
@@ -85,7 +85,7 @@ const ListCard = ({
                     <button
                       disabled={isDeleting}
                       onClick={handleDelete}
-                      className="w-full rounded-lg bg-red-9 py-2 text-center text-sm font-medium text-gray-1 opacity-90 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+                      className="w-full rounded-lg bg-red-9 py-2 text-center text-sm font-medium text-gray-12 opacity-90 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
                     >
                       Yes, i'm sure
                     </button>

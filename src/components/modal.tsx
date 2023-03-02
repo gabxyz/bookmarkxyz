@@ -43,7 +43,7 @@ const Modal = ({
                   damping: 25,
                   stiffness: 350,
                 }}
-                className="fixed inset-0 flex cursor-pointer flex-col overflow-y-auto bg-blackA-9 backdrop-blur-[1px]"
+                className="fixed inset-0 z-40 flex cursor-pointer flex-col overflow-y-auto bg-blackA-9 backdrop-blur-[1px]"
               >
                 <Dialog.Content asChild forceMount>
                   <motion.div

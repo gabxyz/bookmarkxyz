@@ -44,7 +44,7 @@ const Navbar = async () => {
               </Link>
             </Tooltip>
           ) : (
-            <Tooltip content="Sign In" side="right">
+            <Tooltip content="Sign in" side="right">
               <Link
                 href="/login"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
