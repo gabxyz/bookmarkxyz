@@ -14,7 +14,7 @@ export default function Profile() {
     <div className="flex h-full flex-col items-center justify-center gap-10 p-10">
       <div className="flex flex-col gap-8">
         <p className="text-center font-medium opacity-80">
-          Logged in as <strong>{data?.user.name}</strong>
+          Logged in as <strong>{data?.user.username}</strong>
         </p>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
