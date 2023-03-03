@@ -39,7 +39,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
     if (type === "create") {
       try {
         const body = { ...data }
-        await fetch("/api/bookmarkLists", {
+        await fetch("/api/lists/create-list", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -52,8 +52,8 @@ const ListForm = ({ initialData, type }: FormProps) => {
     }
     if (type === "update") {
       try {
-        const body = { ...data }
-        await fetch(`/api/bookmarkLists/${initialData?.listId}`, {
+        const body = { ...data, bookmarkListId: initialData?.listId }
+        await fetch("/api/lists/update-list", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),

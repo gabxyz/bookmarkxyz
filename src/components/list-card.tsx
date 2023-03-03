@@ -35,9 +35,11 @@ const ListCard = ({
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      await fetch(`/api/bookmarkLists/${id}`, {
+      const body = { bookmarkListId: id }
+      await fetch("/api/lists/delete-list", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
       })
       setModalOpen(!modalOpen)
       router.refresh()
