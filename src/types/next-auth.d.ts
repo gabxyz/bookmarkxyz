@@ -6,7 +6,8 @@ declare module "next-auth" {
       id: string
     }
   }
-  interface User extends User {
+  interface User {
     username: string
+    bio: string
   }
 }
