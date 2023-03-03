@@ -100,7 +100,7 @@ const BookmarkForm = ({
               )}
             />
             {errors.title && (
-              <p className="ml-px text-[13px] font-normal text-red-11 opacity-70">
+              <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
                 {errors.title?.message}
               </p>
             )}
@@ -115,7 +115,7 @@ const BookmarkForm = ({
               )}
             />
             {errors.url && (
-              <p className="ml-px text-[13px] font-normal text-red-11 opacity-70">
+              <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
                 {errors.url?.message}
               </p>
             )}

@@ -71,6 +71,8 @@ const ListForm = ({ initialData, type }: FormProps) => {
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
         className="flex h-fit w-full max-w-lg flex-col gap-4 rounded-md border border-gray-6 bg-gray-3 px-8 py-4 text-[15px] shadow-md"
+        spellCheck={false}
+        autoComplete="off"
       >
         <div className="flex w-full flex-col items-start">
           <label className="mb-2 font-medium opacity-75">List Name</label>
@@ -82,7 +84,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
             )}
           />
           {methods.formState.errors.listName?.message && (
-            <p className="ml-px text-[13px] font-normal text-red-11 opacity-70">
+            <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
               {methods.formState.errors.listName?.message}
             </p>
           )}
@@ -99,7 +101,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
             )}
           />
           {methods.formState.errors.listDescription?.message && (
-            <p className="ml-px text-[13px] font-normal text-red-11 opacity-70">
+            <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
               {methods.formState.errors.listDescription?.message}
             </p>
           )}
@@ -111,7 +113,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
               <BookmarkForm type="add" />
             </div>
             {methods.formState.errors.bookmarks?.message && (
-              <p className="ml-px text-[13px] font-normal text-red-11 opacity-70">
+              <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
                 {methods.formState.errors.bookmarks?.message}
               </p>
             )}
