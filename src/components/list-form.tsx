@@ -121,12 +121,12 @@ const ListForm = ({ initialData, type }: FormProps) => {
           {bookmarks?.map((bookmark, index) => (
             <div
               key={bookmark.id || `bookmark.${index}.${bookmark.title}`}
-              className="mx-px flex items-center justify-between gap-2 border-b border-gray-6 pb-3 last:border-0"
+              className="mx-px flex items-center justify-between gap-2 border-b border-gray-6 pb-4 last:border-0"
             >
               <a
                 className={clsx(
-                  "group inline-flex w-1/2 items-center justify-start gap-px truncate text-sm font-medium",
-                  "underline decoration-gray-11 decoration-from-font underline-offset-4",
+                  "group inline-flex w-fit items-center justify-start truncate text-sm font-medium",
+                  "underline decoration-gray-11 decoration-from-font underline-offset-auto",
                   "hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard",
                 )}
                 aria-label={bookmark.title}
@@ -134,10 +134,10 @@ const ListForm = ({ initialData, type }: FormProps) => {
                 rel="noopener noreferrer"
                 href={bookmark.url}
               >
-                {bookmark.title}
+                <p className="mr-1 truncate">{bookmark.title}</p>
                 <ArrowUpRight
                   size={16}
-                  className="text-gray-11 group-hover:rotate-45 motion-safe:duration-200 motion-safe:ease-productive-standard"
+                  className="flex-none text-gray-11 group-hover:rotate-45 motion-safe:duration-200 motion-safe:ease-productive-standard"
                 />
               </a>
               <div className="flex w-1/2 items-center justify-end gap-2">
