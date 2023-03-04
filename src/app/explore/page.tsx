@@ -9,7 +9,15 @@ async function getLists() {
     orderBy: { createdAt: "asc" },
     include: {
       bookmarks: true,
-      author: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+          bio: true,
+          username: true,
+        },
+      },
     },
   })
 }
