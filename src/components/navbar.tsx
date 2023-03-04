@@ -37,7 +37,7 @@ const Navbar = async () => {
           {user ? (
             <Tooltip content={`${user.name}'s Profile`} side="right">
               <Link
-                href="/profile"
+                href="/profile/me"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
                 <Avatar name={user.name!} imageUrl={user.image!} />
