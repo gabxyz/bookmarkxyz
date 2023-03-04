@@ -2,7 +2,7 @@
 
 import { Prisma } from "@prisma/client"
 import clsx from "clsx"
-import { ArrowUpRight, Pencil, Trash, X } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Pencil, Trash, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
@@ -10,12 +10,22 @@ import { useState } from "react"
 
 import Avatar from "./avatar"
 import CopyButton from "./copy-button"
+import HoverCard from "./hover-card"
 import Modal from "./modal"
+import ProfileCard from "./profile-card"
 
 type ListCardProps = Prisma.BookmarkListGetPayload<{
   include: {
     bookmarks: true
-    author: true
+    author: {
+      select: {
+        id: true
+        name: true
+        image: true
+        username: true
+        bio: true
+      }
+    }
   }
 }>
 
@@ -48,18 +58,29 @@ const ListCard = ({
     }
     setIsDeleting(false)
   }
+
   return (
     <div className="flex h-fit w-full flex-col gap-4 overflow-hidden rounded-md border border-gray-6 bg-gray-3 px-6 py-4 text-[15px] shadow-md">
       <div className="-mx-px flex justify-between">
-        <div className="flex w-full flex-col items-start">
+        <div className="-my-1 flex w-full flex-col items-start">
           <h2 className="text-lg font-semibold">{listName}</h2>
           <p className="text-sm font-medium opacity-80">{listDescription}</p>
           <p className="mt-1 text-[13px] text-gray-11">by {author.name}</p>
         </div>
         <div className="flex flex-col items-end justify-between">
-          <Avatar name={author.name!} imageUrl={author.image!} />
+          <HoverCard
+            trigger={<Avatar name={author.name!} imageUrl={author.image!} />}
+          >
+            <ProfileCard
+              name={author.name}
+              username={author.username}
+              bio={author.bio}
+              image={author.image}
+            />
+          </HoverCard>
+
           {isAuthor && (
-            <div className="mb-1 flex items-center justify-end gap-2">
+            <div className="flex items-center justify-end gap-2">
               <Link
                 href={`/lists/edit-list/${id}`}
                 className="text-gray-11 hover:text-gray-12 motion-safe:duration-200 motion-safe:ease-productive-standard"
@@ -102,12 +123,12 @@ const ListCard = ({
         {bookmarks?.map((bookmark) => (
           <div
             key={bookmark.id}
-            className="flex items-center justify-between gap-2 border-b border-gray-6 pb-3 last:border-0"
+            className="flex items-center justify-between gap-2 border-b border-gray-6 pb-4 last:border-0"
           >
             <a
               className={clsx(
-                "group inline-flex w-1/2 items-center justify-start gap-px truncate text-sm font-medium",
-                "underline decoration-gray-11 decoration-from-font underline-offset-4",
+                "group inline-flex w-fit items-center justify-start truncate text-sm font-medium",
+                "underline decoration-gray-11 decoration-from-font underline-offset-auto",
                 "hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard",
               )}
               aria-label={bookmark.title}
@@ -115,7 +136,7 @@ const ListCard = ({
               rel="noopener noreferrer"
               href={bookmark.url}
             >
-              <p className="truncate">{bookmark.title}</p>
+              <p className="mr-1 truncate">{bookmark.title}</p>
               <ArrowUpRight
                 size={16}
                 className="flex-none text-gray-11 group-hover:rotate-45 motion-safe:duration-200 motion-safe:ease-productive-standard"
