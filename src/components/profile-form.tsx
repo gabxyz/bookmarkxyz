@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import clsx from "clsx"
+import { HelpCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -12,7 +13,7 @@ const ProfileSchema = z.object({
   username: z
     .string()
     .min(4, { message: "username should have at least 4 characters" }),
-  bio: z.string(),
+  bio: z.string().max(160, { message: "bio cannot exceed 160 characters" }),
 })
 
 type ProfileSchemaType = z.infer<typeof ProfileSchema>
@@ -102,7 +103,12 @@ const ProfileForm = ({ name, email, username, bio }: ProfileFormProps) => {
         )}
       </div>
       <div className="flex w-full flex-col items-start">
-        <label className="mb-2 font-medium opacity-75">Bio</label>
+        <label className="mb-2 flex items-center gap-1 font-medium opacity-75">
+          Bio{" "}
+          <span className="text-gray-11">
+            <HelpCircle size={13} />
+          </span>
+        </label>
         <textarea
           {...register("bio")}
           className={clsx(
