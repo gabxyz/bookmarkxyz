@@ -1,4 +1,5 @@
 import { User } from "@prisma/client"
+import clsx from "clsx"
 import { Plus } from "lucide-react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -39,7 +40,7 @@ export default async function Lists() {
         Create a new list
         <Plus size={16} />
       </Link>
-      <div className="columns-md space-y-4 lg:columns-sm">
+      <div className="columns-2xs space-y-4 lg:columns-sm xl:columns-md">
         {lists.map((list) => (
           <ListCard key={list.id} {...list} />
         ))}
