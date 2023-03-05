@@ -8,7 +8,7 @@ export const SignIn = () => {
   return (
     <>
       <button
-        onClick={() => signIn("github", { callbackUrl: "/profile" })}
+        onClick={() => signIn("github", { callbackUrl: "/profile/me" })}
         className={clsx(
           "flex w-full items-center justify-center gap-2 py-2 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
@@ -21,7 +21,7 @@ export const SignIn = () => {
         </span>
       </button>
       <button
-        onClick={() => signIn("google", { callbackUrl: "/profile" })}
+        onClick={() => signIn("google", { callbackUrl: "/profile/me" })}
         className={clsx(
           "flex w-full items-center justify-center gap-2 py-2 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
