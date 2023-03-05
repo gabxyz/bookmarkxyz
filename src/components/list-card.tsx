@@ -71,7 +71,14 @@ const ListCard = ({
         </div>
         <div className="flex flex-col items-end justify-between">
           <HoverCard
-            trigger={<Avatar name={author.name!} imageUrl={author.image!} />}
+            trigger={
+              <Link
+                href={`profile/${author.username}`}
+                className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
+              >
+                <Avatar name={author.name!} imageUrl={author.image!} />
+              </Link>
+            }
           >
             <ProfileCard
               name={author.name}
@@ -127,7 +134,7 @@ const ListCard = ({
         {bookmarks?.map((bookmark) => (
           <div
             key={bookmark.id}
-            className="flex items-center justify-between gap-2 border-b border-gray-6 pb-4 last:border-0"
+            className="flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
           >
             <a
               className={clsx(
