@@ -2,17 +2,17 @@
 
 import { Prisma } from "@prisma/client"
 import clsx from "clsx"
-import { ArrowRight, ArrowUpRight, Pencil, Trash, X } from "lucide-react"
+import { ArrowUpRight, Pencil, Trash, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 
-import Avatar from "./avatar"
-import CopyButton from "./copy-button"
-import HoverCard from "./hover-card"
-import Modal from "./modal"
-import ProfileCard from "./profile-card"
+import Avatar from "@/components/avatar"
+import CopyButton from "@/components/copy-button"
+import HoverCard from "@/components/hover-card"
+import Modal from "@/components/modal"
+import ProfileCard from "@/components/profile-card"
 
 type ListCardProps = Prisma.BookmarkListGetPayload<{
   include: {
@@ -24,6 +24,8 @@ type ListCardProps = Prisma.BookmarkListGetPayload<{
         image: true
         username: true
         bio: true
+        twitterURL: true
+        githubURL: true
       }
     }
   }
@@ -76,6 +78,8 @@ const ListCard = ({
               username={author.username}
               bio={author.bio}
               image={author.image}
+              twitterURL={author.twitterURL}
+              githubURL={author.githubURL}
             />
           </HoverCard>
 
