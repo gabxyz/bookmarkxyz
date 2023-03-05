@@ -9,5 +9,7 @@ declare module "next-auth" {
   interface User {
     username: string
     bio: string
+    twitterURL: string
+    githubURL: string
   }
 }

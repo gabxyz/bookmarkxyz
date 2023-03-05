@@ -16,7 +16,7 @@ export default async function handler(
       return res.status(401).end()
     }
 
-    const { username, bio } = req.body
+    const { username, bio, twitterURL, githubURL } = req.body
 
     try {
       // Check if the new username already exists
@@ -31,7 +31,12 @@ export default async function handler(
       // Update the user
       const updatedUser = await db.user.update({
         where: { id: session.user.id },
-        data: { username, bio },
+        data: {
+          username,
+          bio: bio || null,
+          twitterURL: twitterURL || null,
+          githubURL: githubURL || null,
+        },
       })
 
       return res.json(updatedUser)
@@ -41,34 +46,3 @@ export default async function handler(
     }
   }
 }
-
-// async function updateUser(req: NextApiRequest, res: NextApiResponse) {
-//   const session = await getServerSession(req, res, authOptions)
-//   if (!session) {
-//     return res.status(403).end()
-//   }
-
-//   const { username, bio } = req.body
-
-//   try {
-//     const user = await db.user.findUnique({
-//       where: {
-//         username: session.user.username,
-//         id: session.user.id,
-//       },
-//     })
-
-//     if (!user) {
-//       return res.status(404).end()
-//     }
-
-//     const updatedUser = await db.user.update({
-//       where: { username: session.user.username, id: session.user.id },
-//       data: { username, bio },
-//     })
-
-//     return res.json(updatedUser)
-//   } catch (error) {
-//     return res.status(422).json({ error: "unable to update list" })
-//   }
-// }

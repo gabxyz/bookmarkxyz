@@ -46,6 +46,8 @@ model User {
   name          String?
   username      String?        @unique
   bio           String?
+  twitterURL    String?
+  githubURL     String?
   email         String?        @unique
   emailVerified DateTime?
   image         String?
