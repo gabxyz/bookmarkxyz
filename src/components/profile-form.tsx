@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import clsx from "clsx"
-import { HelpCircle } from "lucide-react"
+import { Github, HelpCircle, Twitter } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -12,15 +12,35 @@ import { z } from "zod"
 const ProfileSchema = z.object({
   username: z
     .string()
-    .min(4, { message: "username should have at least 4 characters" }),
-  bio: z.string().max(160, { message: "bio cannot exceed 160 characters" }),
+    .min(4, { message: "Username should have at least 4 characters" }),
+  bio: z
+    .string()
+    .max(160, { message: "Bio cannot exceed 160 characters" })
+    .or(z.literal("")),
+  twitterURL: z
+    .string()
+    .url({ message: "Invalid URL" })
+    .startsWith("https://twitter.com/", { message: "Invalid Twitter URL" })
+    .or(z.literal("")),
+  githubURL: z
+    .string()
+    .url({ message: "Invalid URL" })
+    .startsWith("https://github.com/", { message: "Invalid Github URL" })
+    .or(z.literal("")),
 })
 
 type ProfileSchemaType = z.infer<typeof ProfileSchema>
 
 type ProfileFormProps = Omit<User, "emailVerified" | "image">
 
-const ProfileForm = ({ name, email, username, bio }: ProfileFormProps) => {
+const ProfileForm = ({
+  name,
+  email,
+  username,
+  bio,
+  twitterURL,
+  githubURL,
+}: ProfileFormProps) => {
   const router = useRouter()
   const {
     handleSubmit,
@@ -31,7 +51,12 @@ const ProfileForm = ({ name, email, username, bio }: ProfileFormProps) => {
     formState: { errors, isDirty, isSubmitting, isSubmitSuccessful },
   } = useForm<ProfileSchemaType>({
     resolver: zodResolver(ProfileSchema),
-    defaultValues: { username: username!, bio: bio! },
+    defaultValues: {
+      username: username!,
+      bio: bio || "",
+      twitterURL: twitterURL || "",
+      githubURL: githubURL || "",
+    },
   })
 
   const onSubmit: SubmitHandler<ProfileSchemaType> = async (data) => {
@@ -119,6 +144,48 @@ const ProfileForm = ({ name, email, username, bio }: ProfileFormProps) => {
         {errors.bio?.message && (
           <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
             {errors.bio?.message}
+          </p>
+        )}
+      </div>
+      <div className="flex w-full flex-col items-start">
+        <label className="mb-2 flex items-center gap-1 font-medium opacity-75">
+          <Twitter size={15} />
+          Twitter
+          <span className="text-gray-11">
+            <HelpCircle size={13} />
+          </span>
+        </label>
+        <input
+          {...register("twitterURL")}
+          className={clsx(
+            errors.twitterURL && "border border-red-7",
+            "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
+          )}
+        />
+        {errors.twitterURL?.message && (
+          <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
+            {errors.twitterURL?.message}
+          </p>
+        )}
+      </div>
+      <div className="flex w-full flex-col items-start">
+        <label className="mb-2 flex items-center gap-1 font-medium opacity-75">
+          <Github size={15} />
+          Github
+          <span className="text-gray-11">
+            <HelpCircle size={13} />
+          </span>
+        </label>
+        <input
+          {...register("githubURL")}
+          className={clsx(
+            errors.githubURL && "border border-red-7",
+            "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
+          )}
+        />
+        {errors.githubURL?.message && (
+          <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
+            {errors.githubURL?.message}
           </p>
         )}
       </div>
