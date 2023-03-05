@@ -16,6 +16,8 @@ async function getLists() {
           image: true,
           bio: true,
           username: true,
+          twitterURL: true,
+          githubURL: true,
         },
       },
     },
@@ -28,7 +30,7 @@ export default async function Explore() {
   return (
     <div className="flex h-full w-full flex-col gap-10 p-10">
       <h2 className="text-xl font-semibold">Explore Lists</h2>
-      <div className="columns-md space-y-4 lg:columns-sm">
+      <div className="columns-2xs space-y-4 lg:columns-sm xl:columns-md">
         {lists.map((list) => (
           <ListCard key={list.id} {...list} />
         ))}
