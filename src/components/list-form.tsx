@@ -17,11 +17,17 @@ type FormProps = {
 }
 
 const ListSchema = z.object({
-  listName: z.string().min(1, { message: "list name required" }),
-  listDescription: z.string().min(1, { message: "list description required" }),
+  listName: z
+    .string()
+    .min(1, { message: "List name is required" })
+    .max(20, { message: "List name cannot exceed 20 characters" }),
+  listDescription: z
+    .string()
+    .min(1, { message: "List description is required" })
+    .max(160, { message: "List description cannot exceed 160 characters" }),
   bookmarks: z
     .array(BookmarkSchema)
-    .min(1, { message: "at least one bookmark" }),
+    .min(1, { message: "Add at least one bookmark" }),
 })
 
 export type FormSchemaType = z.infer<typeof ListSchema>
@@ -121,7 +127,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           {bookmarks?.map((bookmark, index) => (
             <div
               key={bookmark.id || `bookmark.${index}.${bookmark.title}`}
-              className="mx-px flex items-center justify-between gap-2 border-b border-gray-6 pb-4 last:border-0"
+              className="flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
             >
               <a
                 className={clsx(

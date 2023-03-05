@@ -12,7 +12,8 @@ import { z } from "zod"
 const ProfileSchema = z.object({
   username: z
     .string()
-    .min(4, { message: "Username should have at least 4 characters" }),
+    .min(4, { message: "Username must have at least 4 characters" })
+    .max(20, { message: "Username cannot exceed 20 characters" }),
   bio: z
     .string()
     .max(160, { message: "Bio cannot exceed 160 characters" })

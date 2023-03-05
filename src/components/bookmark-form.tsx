@@ -12,11 +12,14 @@ import Modal from "@/components/modal"
 import { FormSchemaType } from "./list-form"
 
 export const BookmarkSchema = z.object({
-  title: z.string().min(1, { message: "title required" }),
+  title: z
+    .string()
+    .min(1, { message: "Bookmark title is required" })
+    .max(20, { message: "Bookmark title cannot exceed 20 characters" }),
   url: z
     .string()
-    .url({ message: "invalid url" })
-    .min(1, { message: "url required" }),
+    .url({ message: "Invalid URL" })
+    .startsWith("https://", { message: "Must provide a secure URL" }),
   id: z.string().optional(),
 })
 

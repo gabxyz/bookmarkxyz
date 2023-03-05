@@ -25,7 +25,9 @@ export default async function handler(
       })
 
       if (existingUser && existingUser.id !== session.user.id) {
-        return res.status(409).json({ error: "Username already exists" })
+        return res
+          .status(409)
+          .json({ error: "Username already taken, choose a different one" })
       }
 
       // Update the user
