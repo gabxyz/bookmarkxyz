@@ -27,7 +27,7 @@ const ProfileCard = ({
           <div className="flex flex-col break-words">
             <h2 className="text-[15px] font-semibold leading-none">{name}</h2>
             <p className="text-[13px] text-gray-11">@{username}</p>
-            <p className="mt-2 text-[13px] opacity-80">{bio}</p>
+            <p className="mt-2 ml-px text-[13px] opacity-80">{bio}</p>
           </div>
           <div className="flex items-start gap-2">
             {twitterURL && (

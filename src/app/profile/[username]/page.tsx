@@ -66,7 +66,9 @@ export default async function UserLists({ params }: UserListsProps) {
                 {userData.name}
               </h2>
               <p className="text-[13px] text-gray-11">@{userData.username}</p>
-              <p className="mt-2 text-[13px] opacity-80">{userData.bio}</p>
+              <p className="ml-px mt-2 text-[13px] opacity-80">
+                {userData.bio}
+              </p>
             </div>
             <div className="flex items-start gap-2">
               {userData.twitterURL && (

@@ -127,7 +127,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           {bookmarks?.map((bookmark, index) => (
             <div
               key={bookmark.id || `bookmark.${index}.${bookmark.title}`}
-              className="flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
+              className="mx-px flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
             >
               <a
                 className={clsx(
