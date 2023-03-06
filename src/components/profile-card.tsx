@@ -6,10 +6,8 @@ import { ArrowRight, Github, Twitter } from "lucide-react"
 import Link from "next/link"
 
 import Avatar from "@/components/avatar"
-type ProfileCardProps = Pick<
-  User,
-  "username" | "name" | "bio" | "image" | "twitterURL" | "githubURL"
->
+
+type ProfileCardProps = Omit<User, "email" | "emailVerified">
 
 const ProfileCard = ({
   name,
@@ -20,49 +18,50 @@ const ProfileCard = ({
   githubURL,
 }: ProfileCardProps) => {
   return (
-    <div className="flex w-full gap-2.5">
+    <div className="flex w-full gap-4">
       <Avatar name={name!} imageUrl={image!} />
-      <div className="flex w-full flex-col">
-        <div className="flex w-[310px] justify-between">
-          <div className="flex flex-col break-words">
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex flex-col break-words">
+          <div className="flex items-center justify-between">
             <h2 className="text-[15px] font-semibold leading-none">{name}</h2>
-            <p className="text-[13px] text-gray-11">@{username}</p>
-            <p className="mt-2 ml-px text-[13px] opacity-80">{bio}</p>
+            <div className="flex items-center gap-2">
+              {twitterURL && (
+                <a
+                  className={clsx(
+                    "cursor-pointer text-gray-11",
+                    "hover:text-gray-12 hover:opacity-80",
+                    "motion-safe:duration-200 motion-safe:ease-productive-standard",
+                  )}
+                  aria-label="twitter profile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={twitterURL}
+                >
+                  <Twitter size={16} />
+                </a>
+              )}
+              {githubURL && (
+                <a
+                  className={clsx(
+                    "cursor-pointer text-gray-11",
+                    "hover:text-gray-12 hover:opacity-80",
+                    "motion-safe:duration-200 motion-safe:ease-productive-standard",
+                  )}
+                  aria-label="github profile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={githubURL}
+                >
+                  <Github size={16} />
+                </a>
+              )}
+            </div>
           </div>
-          <div className="flex items-start gap-2">
-            {twitterURL && (
-              <a
-                className={clsx(
-                  "cursor-pointer text-gray-11",
-                  "hover:text-gray-12 hover:opacity-80",
-                  "motion-safe:duration-200 motion-safe:ease-productive-standard",
-                )}
-                aria-label="twitter profile"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={twitterURL}
-              >
-                <Twitter size={16} />
-              </a>
-            )}
-            {githubURL && (
-              <a
-                className={clsx(
-                  "cursor-pointer text-gray-11",
-                  "hover:text-gray-12 hover:opacity-80",
-                  "motion-safe:duration-200 motion-safe:ease-productive-standard",
-                )}
-                aria-label="github profile"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={githubURL}
-              >
-                <Github size={16} />
-              </a>
-            )}
-          </div>
+          <p className="text-[13px] text-gray-11">@{username}</p>
+          <p className="mt-2 ml-px text-[13px] opacity-80">{bio}</p>
         </div>
-        <div className="mt-4 self-end">
+
+        <div className="self-end">
           <Link
             href={`/profile/${username}`}
             className="group inline-flex items-center gap-1 text-[13px] text-gray-12 underline decoration-gray-11 decoration-dashed underline-offset-auto opacity-80 hover:opacity-60 motion-safe:duration-200 motion-safe:ease-productive-standard"
