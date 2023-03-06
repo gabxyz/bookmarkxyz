@@ -1,6 +1,6 @@
 "use client"
 
-import { Prisma } from "@prisma/client"
+import { BookmarkList, Prisma, User } from "@prisma/client"
 import clsx from "clsx"
 import { ArrowUpRight, Pencil, Trash, X } from "lucide-react"
 import Link from "next/link"
@@ -14,40 +14,32 @@ import HoverCard from "@/components/hover-card"
 import Modal from "@/components/modal"
 import ProfileCard from "@/components/profile-card"
 
-type ListCardProps = Prisma.BookmarkListGetPayload<{
-  include: {
+type ListProps = Prisma.BookmarkListGetPayload<{
+  select: {
+    listName: true
+    listDescription: true
     bookmarks: true
-    author: {
-      select: {
-        id: true
-        name: true
-        image: true
-        username: true
-        bio: true
-        twitterURL: true
-        githubURL: true
-      }
-    }
+    id: true
   }
 }>
+type ListCardProps = {
+  list: ListProps
+  author: Omit<User, "emailVerified" | "email">
+}
 
-const ListCard = ({
-  listName,
-  listDescription,
-  bookmarks,
-  author,
-  id,
-}: ListCardProps) => {
+const ListCard = ({ list, author }: ListCardProps) => {
   const router = useRouter()
-  const { data } = useSession()
-  const isAuthor = data?.user.id === author.id
+
+  const { data: session } = useSession()
+  const isAuthor = session?.user.id === author.id
+
   const [modalOpen, setModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      const body = { bookmarkListId: id }
+      const body = { bookmarkListId: list.id }
       await fetch("/api/lists/delete-list", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -65,35 +57,30 @@ const ListCard = ({
     <div className="flex h-fit w-full flex-col gap-4 overflow-hidden rounded-md border border-gray-6 bg-gray-3 px-6 py-4 text-[15px] shadow-md">
       <div className="-mx-px flex justify-between">
         <div className="-my-1 flex w-full flex-col items-start">
-          <h2 className="text-lg font-semibold">{listName}</h2>
-          <p className="text-sm font-medium opacity-80">{listDescription}</p>
+          <h2 className="text-lg font-semibold">{list.listName}</h2>
+          <p className="text-sm font-medium opacity-80">
+            {list.listDescription}
+          </p>
           <p className="mt-1 text-[13px] text-gray-11">by {author.name}</p>
         </div>
         <div className="flex flex-col items-end justify-between">
           <HoverCard
             trigger={
               <Link
-                href={`profile/${author.username}`}
+                href={`/profile/${author.username}`}
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
                 <Avatar name={author.name!} imageUrl={author.image!} />
               </Link>
             }
           >
-            <ProfileCard
-              name={author.name}
-              username={author.username}
-              bio={author.bio}
-              image={author.image}
-              twitterURL={author.twitterURL}
-              githubURL={author.githubURL}
-            />
+            <ProfileCard {...author} />
           </HoverCard>
 
           {isAuthor && (
             <div className="flex items-center justify-end gap-2">
               <Link
-                href={`/lists/edit-list/${id}`}
+                href={`/lists/edit-list/${list.id}`}
                 className="text-gray-11 hover:text-gray-12 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
                 <Pencil size={16} />
@@ -106,8 +93,8 @@ const ListCard = ({
               >
                 <div className="p-4 font-medium">
                   <p className="text-center opacity-80">
-                    Are you sure you want to delete <strong>{listName}</strong>{" "}
-                    list?
+                    Are you sure you want to delete{" "}
+                    <strong>{list.listName}</strong> list?
                   </p>
                   <div className="mt-4 flex gap-4">
                     <button
@@ -131,7 +118,7 @@ const ListCard = ({
         </div>
       </div>
       <div className="mt-4 flex flex-col gap-3">
-        {bookmarks?.map((bookmark) => (
+        {list.bookmarks?.map((bookmark) => (
           <div
             key={bookmark.id}
             className="flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
