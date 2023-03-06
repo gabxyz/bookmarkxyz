@@ -11,7 +11,7 @@ interface HoverCardProps {
 const HoverCard = ({ trigger, children }: HoverCardProps) => {
   return (
     <HoverCardPrimitive.Root openDelay={200} closeDelay={150}>
-      <HoverCardPrimitive.Trigger>{trigger}</HoverCardPrimitive.Trigger>
+      <HoverCardPrimitive.Trigger asChild>{trigger}</HoverCardPrimitive.Trigger>
       <HoverCardPrimitive.Portal>
         <HoverCardPrimitive.Content
           sideOffset={4}
