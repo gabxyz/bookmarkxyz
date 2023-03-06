@@ -1,14 +1,22 @@
 "use client"
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
+import clsx from "clsx"
 import { User } from "lucide-react"
 interface AvatarProps {
   name: string
   imageUrl: string
+  size?: "normal" | "lg"
 }
 
-const Avatar = ({ name, imageUrl }: AvatarProps) => (
-  <AvatarPrimitive.Root className="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
+const Avatar = ({ name, imageUrl, size = "normal" }: AvatarProps) => (
+  <AvatarPrimitive.Root
+    className={clsx(
+      size === "normal" && "h-8 w-8",
+      size === "lg" && "h-14 w-14",
+      "relative flex shrink-0 overflow-hidden rounded-full",
+    )}
+  >
     <AvatarPrimitive.Image
       className="aspect-square h-full w-full"
       src={imageUrl}
