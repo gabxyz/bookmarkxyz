@@ -1,8 +1,8 @@
 "use client"
 
-import { BookmarkList, Prisma, User } from "@prisma/client"
+import { Prisma, User } from "@prisma/client"
 import clsx from "clsx"
-import { ArrowUpRight, Pencil, Trash, X } from "lucide-react"
+import { ArrowUpRight, Loader2, Pencil, Trash, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
@@ -98,17 +98,22 @@ const ListCard = ({ list, author }: ListCardProps) => {
                   </p>
                   <div className="mt-4 flex gap-4">
                     <button
+                      disabled={isDeleting}
                       onClick={() => setModalOpen(false)}
-                      className="w-full rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-gray-12 shadow-md hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard"
+                      className="inline-flex w-full items-center justify-center rounded-lg border border-gray-7 bg-gray-4 py-2 text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
                     >
                       Cancel
                     </button>
                     <button
                       disabled={isDeleting}
                       onClick={handleDelete}
-                      className="w-full rounded-lg bg-red-9 py-2 text-center text-sm font-medium text-gray-12 opacity-90 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+                      className="inline-flex w-full items-center justify-center rounded-lg border border-red-7 bg-gray-4 py-2 text-sm font-medium text-red-11 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
                     >
-                      Yes, i'm sure
+                      {isDeleting ? (
+                        <Loader2 size={20} className="animate-spin" />
+                      ) : (
+                        <p>Yes, i'm sure</p>
+                      )}
                     </button>
                   </div>
                 </div>

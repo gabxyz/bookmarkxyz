@@ -64,7 +64,7 @@ const ProfileCard = ({
         <div className="self-end">
           <Link
             href={`/profile/${username}`}
-            className="group inline-flex items-center gap-1 text-[13px] text-gray-12 underline decoration-gray-11 decoration-dashed underline-offset-auto opacity-80 hover:opacity-60 motion-safe:duration-200 motion-safe:ease-productive-standard"
+            className="group inline-flex items-center gap-1 text-[13px] text-gray-12 underline decoration-gray-11 decoration-dotted underline-offset-4 opacity-80 hover:opacity-60 motion-safe:duration-200 motion-safe:ease-productive-standard"
           >
             {username}'s profile
             <ArrowRight

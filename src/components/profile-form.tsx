@@ -3,9 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import clsx from "clsx"
-import { Github, HelpCircle, Twitter } from "lucide-react"
+import { Github, HelpCircle, Loader2, Twitter } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -42,6 +42,7 @@ const ProfileForm = ({
   twitterURL,
   githubURL,
 }: ProfileFormProps) => {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const {
     handleSubmit,
@@ -49,7 +50,7 @@ const ProfileForm = ({
     setError,
     reset,
     getValues,
-    formState: { errors, isDirty, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isDirty, isSubmitSuccessful },
   } = useForm<ProfileSchemaType>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
@@ -61,6 +62,7 @@ const ProfileForm = ({
   })
 
   const onSubmit: SubmitHandler<ProfileSchemaType> = async (data) => {
+    setIsLoading(true)
     try {
       const body = { ...data }
       const res = await fetch("/api/user/update-user", {
@@ -69,10 +71,12 @@ const ProfileForm = ({
         body: JSON.stringify(body),
       })
       if (res.status === 409) {
+        setIsLoading(false)
         const { error } = await res.json()
-        setError("username", { type: "custom", message: error })
+        return setError("username", { type: "custom", message: error })
       }
       router.refresh()
+      router.push(`/profile/${data.username}`)
     } catch (error) {
       console.log(error)
     }
@@ -191,11 +195,15 @@ const ProfileForm = ({
         )}
       </div>
       <button
-        disabled={!isDirty || isSubmitting}
+        disabled={!isDirty || isLoading}
         type="submit"
-        className="mt-2 w-full rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+        className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gray-5 py-2 text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
       >
-        Save
+        {isLoading ? (
+          <Loader2 size={20} className="animate-spin" />
+        ) : (
+          <p>Save</p>
+        )}
       </button>
     </form>
   )
