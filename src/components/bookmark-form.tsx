@@ -38,7 +38,7 @@ const BookmarkForm = ({
 }: BookmarkFormProps) => {
   const [modalOpen, setModalOpen] = useState(false)
 
-  const { control } = useFormContext<FormSchemaType>()
+  const { control, setValue } = useFormContext<FormSchemaType>()
   const {
     trigger,
     getValues,
@@ -50,7 +50,7 @@ const BookmarkForm = ({
     defaultValues: initialData,
   })
 
-  const { append, update, remove } = useFieldArray({
+  const { append, remove } = useFieldArray({
     control,
     name: "bookmarks",
   })
@@ -61,16 +61,15 @@ const BookmarkForm = ({
       append({
         title: getValues("title"),
         url: getValues("url"),
+        id: Math.random().toString(36).substring(2, 7),
       })
-      setModalOpen(!modalOpen)
+      await setModalOpen(!modalOpen)
       reset()
     }
     if (res && type === "update") {
-      update(index!, {
-        title: getValues("title"),
-        url: getValues("url"),
-      })
-      setModalOpen(!modalOpen)
+      setValue(`bookmarks.${index!}.title`, getValues("title"))
+      setValue(`bookmarks.${index!}.url`, getValues("url"))
+      await setModalOpen(!modalOpen)
       reset({
         title: getValues("title"),
         url: getValues("url"),
@@ -125,7 +124,7 @@ const BookmarkForm = ({
           </div>
         </div>
         <button
-          type="submit"
+          type="button"
           disabled={!isDirty}
           onClick={() => onSubmit()}
           className="mt-4 w-3/5 self-center rounded-lg bg-gray-5 py-1.5 text-center font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"

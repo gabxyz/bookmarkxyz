@@ -2,8 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import clsx from "clsx"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -33,15 +34,17 @@ const ListSchema = z.object({
 export type FormSchemaType = z.infer<typeof ListSchema>
 
 const ListForm = ({ initialData, type }: FormProps) => {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const methods = useForm<FormSchemaType>({
     resolver: zodResolver(ListSchema),
     defaultValues: initialData,
   })
 
-  const bookmarks = methods.getValues("bookmarks")
+  const bookmarks = methods.watch("bookmarks")
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
+    setIsLoading(true)
     if (type === "create") {
       try {
         const body = { ...data }
@@ -126,7 +129,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           </div>
           {bookmarks?.map((bookmark, index) => (
             <div
-              key={bookmark.id || `bookmark.${index}.${bookmark.title}`}
+              key={bookmark.id}
               className="mx-px flex items-center justify-between gap-4 border-b border-gray-6 pb-4 last:border-0"
             >
               <a
@@ -162,15 +165,15 @@ const ListForm = ({ initialData, type }: FormProps) => {
           ))}
         </div>
         <button
-          disabled={
-            !methods.formState.isDirty ||
-            methods.formState.isSubmitting ||
-            methods.formState.isSubmitSuccessful
-          }
+          disabled={!methods.formState.isDirty || isLoading}
           type="submit"
-          className="mt-2 w-full rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
+          className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gray-5 py-2 text-sm font-medium text-gray-12 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
         >
-          Save
+          {isLoading ? (
+            <Loader2 size={20} className="animate-spin" />
+          ) : (
+            <p>Save</p>
+          )}
         </button>
       </form>
     </FormProvider>
