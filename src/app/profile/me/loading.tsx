@@ -10,11 +10,9 @@ export default function Loading() {
           </div>
           <p>Me</p>
         </h2>
-        <div className="w-[160px]">
-          <button className="inline-flex w-full max-w-lg items-center justify-center rounded-lg border border-red-6 bg-gray-4 py-1.5 text-sm font-medium text-red-11 shadow-md">
-            Sign out
-          </button>
-        </div>
+        <button className="inline-flex w-fit items-center justify-center rounded-lg border border-red-6 bg-gray-4 py-1.5 px-6 text-sm font-medium text-red-11 shadow-md">
+          Sign out
+        </button>
       </div>
       <div className="mt-20 flex justify-center">
         <Loader size={24} className="animate-spin" />
