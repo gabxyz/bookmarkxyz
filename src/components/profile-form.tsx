@@ -91,7 +91,7 @@ const ProfileForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex h-fit w-full max-w-lg flex-col gap-4 rounded-md border border-gray-6 bg-gray-3 px-8 py-4 text-[15px] shadow-md"
+      className="flex h-fit w-full max-w-xl flex-col gap-4 rounded-md border border-gray-6 bg-gray-3 px-8 py-4 text-[15px] shadow-md"
       spellCheck={false}
       autoComplete="off"
     >
