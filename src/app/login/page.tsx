@@ -1,3 +1,4 @@
+import { User } from "lucide-react"
 import { redirect } from "next/navigation"
 
 import { SignIn } from "@/components/auth-button"
@@ -11,12 +12,21 @@ export default async function Login() {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-10 p-10">
-      <div className="flex flex-col gap-4">
+    <div className="flex h-full w-full flex-col gap-4 p-10">
+      <h2 className="flex items-center gap-2 border-b border-gray-6 pb-4 text-xl font-semibold">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-8 bg-gray-4 text-gray-11">
+          <User size={16} />
+        </div>
+        <p>Log in</p>
+      </h2>
+      <div className="flex flex-col items-center justify-center">
         <p className="mb-8 text-center font-medium opacity-80">
-          Hey there! Sign in and enjoy <strong>Bookmarkxyz</strong>!
+          Hey there! Log in to your account or create a new profile and enjoy{" "}
+          <strong>Bookmarkxyz</strong>!
         </p>
-        <SignIn />
+        <div className="flex w-full flex-col items-center gap-3">
+          <SignIn />
+        </div>
       </div>
     </div>
   )
