@@ -34,14 +34,14 @@ export default async function Lists() {
     <div className="flex h-full w-full flex-col gap-4 p-10">
       <div className="flex items-end justify-between gap-2 border-b border-gray-6 pb-4">
         <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Scroll size={20} />
+          <Scroll size={24} />
           My Lists
         </h2>
         <Link
-          href="/lists/create-list"
+          href="/create-list"
           className="inline-flex w-fit items-center gap-2 rounded-lg bg-gray-5 px-4 py-2 text-sm font-medium text-slate-12 shadow-md hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard"
         >
-          Create a new list
+          Create new list
           <Plus size={16} />
         </Link>
       </div>
