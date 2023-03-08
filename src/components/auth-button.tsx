@@ -64,7 +64,7 @@ export const SignOut = () => {
   return (
     <button
       onClick={() => signOut({ callbackUrl: "/" })}
-      className="w-full max-w-lg rounded-lg bg-gray-5 py-2 text-center text-sm font-medium text-gray-12 shadow-md hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard"
+      className="inline-flex w-fit items-center justify-center rounded-lg border border-red-6 bg-gray-4 py-1.5 px-6 text-sm font-medium text-red-11 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
     >
       Sign out
     </button>
