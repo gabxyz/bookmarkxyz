@@ -22,7 +22,7 @@ export default async function Explore() {
   return (
     <div className="flex h-full w-full flex-col gap-4 p-10">
       <h2 className="flex items-center gap-2 border-b border-gray-6 pt-2 pb-4 text-xl font-semibold">
-        <Rocket size={20} />
+        <Rocket size={24} />
         Explore
       </h2>
       <div className="columns-2xs space-y-4 lg:columns-sm xl:columns-md">
