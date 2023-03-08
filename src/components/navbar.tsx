@@ -28,7 +28,7 @@ const Navbar = async () => {
           </Tooltip>
           <Tooltip content="My Lists" side="right">
             <Link
-              href="/lists"
+              href="/my-lists"
               className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
             >
               <Scroll size={20} />

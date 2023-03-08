@@ -54,7 +54,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           body: JSON.stringify(body),
         })
         router.refresh()
-        router.push("/lists")
+        router.push("/my-lists")
       } catch (error) {
         console.log(error)
       }
@@ -68,7 +68,7 @@ const ListForm = ({ initialData, type }: FormProps) => {
           body: JSON.stringify(body),
         })
         router.refresh()
-        router.push("/lists")
+        router.push("/my-lists")
       } catch (error) {
         console.log(error)
       }

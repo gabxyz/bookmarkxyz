@@ -80,7 +80,7 @@ const ListCard = ({ list, author }: ListCardProps) => {
           {isAuthor && (
             <div className="flex items-center justify-end gap-2">
               <Link
-                href={`/lists/edit-list/${list.id}`}
+                href={`/edit-list/${list.id}`}
                 className="text-gray-11 hover:text-gray-12 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
                 <Pencil size={16} />
