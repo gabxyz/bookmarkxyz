@@ -10,20 +10,20 @@ export const SignIn = () => {
       <button
         onClick={() => signIn("github", { callbackUrl: "/profile/me" })}
         className={clsx(
-          "flex w-full items-center justify-center gap-2 py-2 text-sm",
+          "flex w-full max-w-sm items-center justify-center gap-2 py-2 px-4 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
           "hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard",
         )}
       >
         <Github size={18} />
         <span>
-          Sign in with <strong>Github</strong>
+          Continue with <strong>Github</strong>
         </span>
       </button>
       <button
         onClick={() => signIn("google", { callbackUrl: "/profile/me" })}
         className={clsx(
-          "flex w-full items-center justify-center gap-2 py-2 text-sm",
+          "flex w-full max-w-sm items-center justify-center gap-2 py-2 px-4 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
           "hover:opacity-80 motion-safe:duration-150 motion-safe:ease-productive-standard",
         )}
@@ -53,7 +53,7 @@ export const SignIn = () => {
           <path d="M1 1h22v22H1z" fill="none" />
         </svg>
         <span>
-          Sign in with <strong>Google</strong>
+          Continue with <strong>Google</strong>
         </span>
       </button>
     </>
