@@ -4,7 +4,6 @@ import { Github, Twitter } from "lucide-react"
 import { notFound } from "next/navigation"
 
 import Avatar from "@/components/avatar"
-import BackButton from "@/components/back-button"
 import ListCard from "@/components/list-card"
 import { db } from "@/lib/db"
 
