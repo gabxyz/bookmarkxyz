@@ -1,13 +1,15 @@
-import { FolderHeart, Rocket, Scroll, User } from "lucide-react"
+"use client"
+
+import { FolderHeart, Rocket, Scroll, User as UserIcon } from "lucide-react"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
-import { getCurrentUser } from "@/lib/session"
+import Avatar from "@/components/avatar"
+import Tooltip from "@/components/tooltip"
 
-import Avatar from "./avatar"
-import Tooltip from "./tooltip"
+const Navbar = () => {
+  const { data: session } = useSession()
 
-const Navbar = async () => {
-  const user = await getCurrentUser()
   return (
     <div className="fixed z-20 h-14 w-full border-b border-gray-6 bg-gray-3 md:h-full md:w-16 md:border-r">
       <div className="flex h-full items-center justify-between px-6 text-gray-11 md:flex-col md:py-6">
@@ -34,13 +36,16 @@ const Navbar = async () => {
               <Scroll size={20} />
             </Link>
           </Tooltip>
-          {user ? (
-            <Tooltip content={`${user.name}'s Profile`} side="right">
+          {session?.user ? (
+            <Tooltip content={`${session.user.name}'s Profile`} side="right">
               <Link
                 href="/profile/me"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
-                <Avatar name={user.name!} imageUrl={user.image!} />
+                <Avatar
+                  name={session.user.name!}
+                  imageUrl={session.user.image!}
+                />
               </Link>
             </Tooltip>
           ) : (
@@ -49,7 +54,7 @@ const Navbar = async () => {
                 href="/login"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
               >
-                <User size={20} />
+                <UserIcon size={20} />
               </Link>
             </Tooltip>
           )}
