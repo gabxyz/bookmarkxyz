@@ -2,13 +2,22 @@
 
 import clsx from "clsx"
 import { Github } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 import { signIn, signOut } from "next-auth/react"
 
 export const SignIn = () => {
+  const searchParams = useSearchParams()
+  const handleSignIn = (provider: string) => {
+    signIn(provider, {
+      redirect: false,
+      callbackUrl: searchParams?.get("from") || "/profile/me",
+    })
+  }
+
   return (
     <>
       <button
-        onClick={() => signIn("github", { callbackUrl: "/profile/me" })}
+        onClick={() => handleSignIn("github")}
         className={clsx(
           "flex w-full max-w-sm items-center justify-center gap-2 py-2 px-4 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
@@ -21,7 +30,7 @@ export const SignIn = () => {
         </span>
       </button>
       <button
-        onClick={() => signIn("google", { callbackUrl: "/profile/me" })}
+        onClick={() => handleSignIn("google")}
         className={clsx(
           "flex w-full max-w-sm items-center justify-center gap-2 py-2 px-4 text-sm",
           "rounded-lg border border-gray-7 bg-gray-4 font-medium shadow-md",
@@ -63,7 +72,11 @@ export const SignIn = () => {
 export const SignOut = () => {
   return (
     <button
-      onClick={() => signOut({ callbackUrl: "/" })}
+      onClick={() =>
+        signOut({
+          callbackUrl: "/login",
+        })
+      }
       className="inline-flex w-fit items-center justify-center rounded-lg border border-red-6 bg-gray-4 py-1.5 px-6 text-sm font-medium text-red-11 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
     >
       Sign out
