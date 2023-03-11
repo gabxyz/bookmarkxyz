@@ -8,7 +8,7 @@ export default async function Login() {
   const user = await getCurrentUser()
 
   if (user) {
-    redirect("/profile")
+    redirect("/profile/me")
   }
 
   return (
