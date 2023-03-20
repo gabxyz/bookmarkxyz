@@ -15,7 +15,7 @@ const Tooltip = ({
   children,
   content,
   align = "center",
-  side = "bottom",
+  side = "right",
 }: TooltipProps) => {
   return (
     <TooltipPrimitive.Root>
@@ -26,7 +26,7 @@ const Tooltip = ({
           align={align}
           sideOffset={12}
           className={clsx(
-            "z-30 inline-flex items-center py-1 px-3",
+            "z-30 hidden items-center py-1 px-3 md:inline-flex",
             "rounded-2xl bg-gray-6 text-[13px] font-medium text-gray-12 shadow",
             "motion-safe:rdx-side-bottom:animate-slide-down-fade motion-safe:rdx-side-top:animate-slide-up-fade",
             "motion-safe:rdx-side-left:animate-slide-left-fade motion-safe:rdx-side-right:animate-slide-right-fade",

@@ -20,7 +20,7 @@ const Navbar = () => {
           <FolderHeart size={28} />
         </Link>
         <div className="flex items-center gap-8 md:flex-col">
-          <Tooltip content="Explore" side="right">
+          <Tooltip content="Explore">
             <Link
               href="/explore"
               className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
@@ -28,7 +28,7 @@ const Navbar = () => {
               <Rocket size={20} />
             </Link>
           </Tooltip>
-          <Tooltip content="My Lists" side="right">
+          <Tooltip content="My Lists">
             <Link
               href="/my-lists"
               className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
@@ -37,7 +37,7 @@ const Navbar = () => {
             </Link>
           </Tooltip>
           {session?.user ? (
-            <Tooltip content={`${session.user.name}'s Profile`} side="right">
+            <Tooltip content={`${session.user.name}'s Profile`}>
               <Link
                 href="/profile/me"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
@@ -49,7 +49,7 @@ const Navbar = () => {
               </Link>
             </Tooltip>
           ) : (
-            <Tooltip content="Log in" side="right">
+            <Tooltip content="Log in">
               <Link
                 href="/login"
                 className="hover:text-gray-12 hover:opacity-80 motion-safe:duration-200 motion-safe:ease-productive-standard"
