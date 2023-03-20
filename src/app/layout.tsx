@@ -22,7 +22,7 @@ export const metadata = {
     template: "%s | bookmarkxyz",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
   },
   robots: {
     index: true,
