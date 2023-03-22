@@ -11,10 +11,10 @@ interface ProvidersProps {
 
 export default function Providers({ children, session }: ProvidersProps) {
   return (
-    <SessionProvider session={session}>
-      <ThemeProvider attribute="class" disableTransitionOnChange>
+    <ThemeProvider attribute="class" disableTransitionOnChange>
+      <SessionProvider session={session}>
         <TooltipProvider delayDuration={150}>{children}</TooltipProvider>
-      </ThemeProvider>
-    </SessionProvider>
+      </SessionProvider>
+    </ThemeProvider>
   )
 }
