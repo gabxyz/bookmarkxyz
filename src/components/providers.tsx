@@ -4,6 +4,7 @@ import { TooltipProvider } from "@radix-ui/react-tooltip"
 import type { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "next-themes"
+
 interface ProvidersProps {
   children: React.ReactNode
   session: Session | null

@@ -3,6 +3,7 @@ import "@/styles/globals.css"
 import { Inter as FontSans } from "@next/font/google"
 import clsx from "clsx"
 import { getServerSession } from "next-auth/next"
+import { ServerThemeProvider } from "next-themes"
 
 import { Analytics } from "@/components/analytics"
 import Navbar from "@/components/navbar"
@@ -44,18 +45,20 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions)
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={clsx("font-sans", fontSans.variable)}>
-        <Providers session={session}>
-          <SessionContext>
-            <Navbar />
-            <main className="flex max-h-screen flex-col pt-16 md:ml-16 md:pt-4">
-              {children}
-              <Analytics />
-            </main>
-          </SessionContext>
-        </Providers>
-      </body>
-    </html>
+    <ServerThemeProvider attribute="class" disableTransitionOnChange>
+      <html lang="en">
+        <body className={clsx("font-sans", fontSans.variable)}>
+          <Providers session={session}>
+            <SessionContext>
+              <Navbar />
+              <main className="flex max-h-screen flex-col pt-16 md:ml-16 md:pt-4">
+                {children}
+                <Analytics />
+              </main>
+            </SessionContext>
+          </Providers>
+        </body>
+      </html>
+    </ServerThemeProvider>
   )
 }
