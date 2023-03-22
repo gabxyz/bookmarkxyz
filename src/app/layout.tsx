@@ -7,7 +7,6 @@ import { getServerSession } from "next-auth/next"
 import { Analytics } from "@/components/analytics"
 import Navbar from "@/components/navbar"
 import Providers from "@/components/providers"
-import SessionContext from "@/components/session-context"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 const fontSans = FontSans({
@@ -47,13 +46,11 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={clsx("font-sans", fontSans.variable)}>
         <Providers session={session}>
-          <SessionContext>
-            <Navbar />
-            <main className="flex max-h-screen flex-col pt-16 md:ml-16 md:pt-4">
-              {children}
-              <Analytics />
-            </main>
-          </SessionContext>
+          <Navbar />
+          <main className="flex max-h-screen flex-col pt-16 md:ml-16 md:pt-4">
+            {children}
+            <Analytics />
+          </main>
         </Providers>
       </body>
     </html>
