@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
 
 import { Inter as FontSans } from "@next/font/google"
-import { Analytics } from "@vercel/analytics/react"
 import clsx from "clsx"
 import { getServerSession } from "next-auth/next"
 
+import { Analytics } from "@/components/analytics"
 import Navbar from "@/components/navbar"
 import Providers from "@/components/providers"
 import SessionContext from "@/components/session-context"
