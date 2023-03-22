@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { useTheme } from "next-themes"
 import { useEffect } from "react"
 
 interface SessionContextProps {
@@ -10,11 +11,12 @@ interface SessionContextProps {
 
 const SessionContext = ({ children }: SessionContextProps) => {
   const { data: session } = useSession()
+  const { theme } = useTheme()
   const router = useRouter()
 
   useEffect(() => {
     router.refresh()
-  }, [session, router])
+  }, [session, router, theme])
   return <>{children}</>
 }
 

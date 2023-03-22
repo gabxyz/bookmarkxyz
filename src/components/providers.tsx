@@ -11,7 +11,7 @@ interface ProvidersProps {
 
 export default function Providers({ children, session }: ProvidersProps) {
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class" disableTransitionOnChange>
       <TooltipProvider delayDuration={150}>
         <SessionProvider session={session}>{children}</SessionProvider>
       </TooltipProvider>
