@@ -74,7 +74,7 @@ export const SignOut = () => {
     <button
       onClick={() =>
         signOut({
-          callbackUrl: "/login",
+          callbackUrl: "/",
         })
       }
       className="inline-flex w-fit items-center justify-center rounded-lg border border-red-6 bg-gray-4 py-1.5 px-6 text-sm font-medium text-red-11 shadow-md hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:duration-150 motion-safe:ease-productive-standard"
