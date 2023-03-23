@@ -12,12 +12,6 @@ const ThemeSelect = () => {
   const [mounted, setMounted] = useState(false)
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
-  const [currValue, setCurrValue] = useState(theme)
-
-  const setResolvedTheme = (resolvedTheme: string) => {
-    setTheme(resolvedTheme)
-    setCurrValue(resolvedTheme)
-  }
 
   const themes: { value: string; icon: ReactElement }[] = [
     { value: "system", icon: <Monitor size={16} /> },
@@ -46,7 +40,7 @@ const ThemeSelect = () => {
           "motion-safe:duration-150 motion-safe:ease-productive-standard",
         )}
       >
-        {themes.find((theme) => theme.value === currValue)?.icon}
+        {themes.find((themeCurr) => themeCurr.value === theme)?.icon}
         {<ChevronDown size={15} />}
       </DropdownMenu.Trigger>
       <AnimatePresence>
@@ -65,8 +59,8 @@ const ThemeSelect = () => {
                 exit={{ opacity: 0, transition: { duration: 0.2 } }}
               >
                 <DropdownMenu.RadioGroup
-                  value={currValue}
-                  onValueChange={setResolvedTheme}
+                  value={theme}
+                  onValueChange={setTheme}
                   className="divide-y divide-gray-6 overflow-hidden rounded-lg border border-gray-7 bg-gray-3 shadow"
                 >
                   {themes.map(({ value, icon }) => (
