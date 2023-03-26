@@ -1,7 +1,7 @@
 import "@/styles/globals.css"
 
-import { Inter as FontSans } from "@next/font/google"
 import clsx from "clsx"
+import { Inter as FontSans } from "next/font/google"
 import { getServerSession } from "next-auth/next"
 
 import { Analytics } from "@/components/analytics"
