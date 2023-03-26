@@ -39,6 +39,7 @@ const BookmarkForm = ({
   const [modalOpen, setModalOpen] = useState(false)
 
   const { control, setValue } = useFormContext<FormSchemaType>()
+
   const {
     trigger,
     getValues,
@@ -67,8 +68,12 @@ const BookmarkForm = ({
       reset()
     }
     if (res && type === "update") {
-      setValue(`bookmarks.${index!}.title`, getValues("title"))
-      setValue(`bookmarks.${index!}.url`, getValues("url"))
+      setValue(`bookmarks.${index!}.title`, getValues("title"), {
+        shouldDirty: true,
+      })
+      setValue(`bookmarks.${index!}.url`, getValues("url"), {
+        shouldDirty: true,
+      })
       await setModalOpen(!modalOpen)
       reset({
         title: getValues("title"),

@@ -53,8 +53,8 @@ const ListForm = ({ initialData, type }: FormProps) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         })
-        router.refresh()
         router.push("/my-lists")
+        router.refresh()
       } catch (error) {
         console.log(error)
       }
@@ -67,8 +67,8 @@ const ListForm = ({ initialData, type }: FormProps) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         })
-        router.refresh()
         router.push("/my-lists")
+        router.refresh()
       } catch (error) {
         console.log(error)
       }
