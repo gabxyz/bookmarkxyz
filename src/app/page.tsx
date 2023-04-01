@@ -133,7 +133,7 @@ export default function Home() {
           </p>
         </div>
         <div>
-          <h3 className="mb-2 font-semibold opacity-90">Why i built this</h3>
+          <h3 className="mb-2 font-semibold opacity-90">Why I built this</h3>
           <p className="text-[15px] text-gray-11">
             As with many of my personal projects, the main motivation behind
             creating this website was to learn and explore new technologies that

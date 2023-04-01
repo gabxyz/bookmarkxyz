@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic"
 
 async function getLists() {
   return await db.bookmarkList.findMany({
-    take: 10,
-    orderBy: { createdAt: "asc" },
+    take: 15,
+    orderBy: { createdAt: "desc" },
     include: {
       bookmarks: true,
       author: true,
