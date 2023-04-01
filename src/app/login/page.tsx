@@ -21,8 +21,8 @@ export default async function Login() {
       </h2>
       <div className="flex flex-col items-center justify-center">
         <p className="mb-8 text-center font-medium opacity-80">
-          Hey there! Log in to your account or create a new profile and enjoy{" "}
-          <strong>Bookmarkxyz</strong>!
+          Hello! Please log in to an existing account or create a new profile to
+          continue.
         </p>
         <div className="flex w-full flex-col items-center gap-3">
           <SignIn />
