@@ -105,6 +105,8 @@ const BookmarkForm = ({
                 errors.title && "border border-red-7",
                 "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
               )}
+              spellCheck={false}
+              autoComplete="off"
             />
             {errors.title && (
               <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
@@ -120,6 +122,8 @@ const BookmarkForm = ({
                 errors.url && "border border-red-7",
                 "-mx-px block w-full rounded-md bg-gray-6 py-1.5 px-2",
               )}
+              spellCheck={false}
+              autoComplete="off"
             />
             {errors.url && (
               <p className="ml-px mt-1 text-[13px] font-normal text-red-11 opacity-70">
