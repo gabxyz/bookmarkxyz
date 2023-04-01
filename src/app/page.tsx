@@ -208,10 +208,9 @@ export default function Home() {
           <p className="text-[15px] text-gray-11">
             I'm{" "}
             <span className="font-medium text-gray-12 opacity-80">Gabriel</span>
-            , an aspiring front-end developer with great interest in UI/UX
-            driven development, passionate about well-crafted, polished user
-            interfaces that provide great experiences through attention to
-            detail and interaction.
+            , a front-end developer with great interest in UI/UX, passionate
+            about well-crafted, polished user interfaces that provide great
+            experiences through attention to detail and interaction.
           </p>
         </div>
         <div>

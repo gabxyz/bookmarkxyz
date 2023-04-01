@@ -29,7 +29,7 @@ export default async function Profile() {
     <ProtectedClient>
       <div className="flex h-full w-full flex-col gap-4 p-10">
         <div className="flex items-end justify-between gap-2 border-b border-gray-6 pb-4">
-          <h2 className="flex items-center gap-2 text-xl font-semibold">
+          <h2 className="flex items-end gap-2 text-xl font-semibold">
             <Avatar name={userData?.name!} imageUrl={userData?.image!} />
             <p>Me</p>
           </h2>
