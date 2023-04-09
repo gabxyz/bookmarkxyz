@@ -234,10 +234,9 @@ export default function Home() {
               />
             </a>
             <p className="mt-1 text-[15px] text-gray-11">
-              The UI of this website was heavily inspired by read.cv, an amazing
-              website that I definitely recommend checking out, really
-              beautiful, smooth UI and a great place to find talented people and
-              their work.
+              The UI of this website was inspired by read.cv, an amazing website
+              that I definitely recommend checking out, really beautiful, smooth
+              UI and a great place to find talented people and their work.
             </p>
           </div>
           <div>

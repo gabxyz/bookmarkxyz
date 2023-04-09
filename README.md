@@ -67,7 +67,7 @@ There's nothing too complex about it, to better explain this, let's break this i
 
 ## Resources
 
-**[read.cv](https://read.cv)** - The UI of this website was heavily inspired by read.cv, an amazing website that I definitely recommend checking out, really beautiful, smooth UI and a great place to find talented people and their work.
+**[read.cv](https://read.cv)** - The UI of this website was inspired by read.cv, an amazing website that I definitely recommend checking out, really beautiful, smooth UI and a great place to find talented people and their work.
 
 **[taxonomy](https://github.com/shadcn/taxonomy)** - Built by shadcn, taxonomy was insanely helpful in the process of building this website, I strongly recommend taking a look at the repository if you're exploring RSC and Next.js app directory.
 
